@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 
 class AuthenticateData(BaseModel):
-	token: str = "Hello!"
+	token: str
 
 
 class AuthenticateAction(BaseModel):
