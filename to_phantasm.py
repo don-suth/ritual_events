@@ -17,7 +17,7 @@ class LetMeInData(BaseModel):
 
 class LetMeInAction(BaseModel):
 	time: datetime
-	action: Literal["LetMeIn"]
+	action: Literal["LetMeIn"] = "LetMeIn"
 	data: LetMeInData
 
 
@@ -28,7 +28,7 @@ class FoodRunData(BaseModel):
 
 class FoodRunAction(BaseModel):
 	time: datetime
-	action: Literal["FoodRun"]
+	action: Literal["FoodRun"] = "FoodRun"
 	data: FoodRunData
 
 
@@ -40,7 +40,7 @@ class ClockSettingsUpdateData(BaseModel):
 
 class ClockSettingsUpdateAction(BaseModel):
 	time: datetime
-	action: Literal["ClockSettingsUpdate"]
+	action: Literal["ClockSettingsUpdate"] = "ClockSettingsUpdate"
 	data: ClockSettingsUpdateData
 
 
