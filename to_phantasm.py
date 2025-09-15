@@ -1,7 +1,8 @@
 from enum import Enum
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from pydantic_extra_types.color import Color as Colour
+from typing import Literal
 
 
 class EntranceEnum(str, Enum):
@@ -16,7 +17,7 @@ class LetMeInData(BaseModel):
 
 class LetMeInAction(BaseModel):
 	time: datetime
-	action: str = "LetMeIn"
+	action: Literal["LetMeIn"]
 	data: LetMeInData
 
 
@@ -27,7 +28,7 @@ class FoodRunData(BaseModel):
 
 class FoodRunAction(BaseModel):
 	time: datetime
-	action: str = "FoodRun"
+	action: Literal["FoodRun"]
 	data: FoodRunData
 
 
@@ -39,5 +40,9 @@ class ClockSettingsUpdateData(BaseModel):
 
 class ClockSettingsUpdateAction(BaseModel):
 	time: datetime
-	action: str = "ClockSettingsUpdate"
+	action: Literal["ClockSettingsUpdate"]
 	data: ClockSettingsUpdateData
+
+
+class ReceivedAction(BaseModel):
+	action: LetMeInAction | FoodRunAction | ClockSettingsUpdateAction = Field(discriminator="action")
