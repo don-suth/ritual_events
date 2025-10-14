@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ValidationInfo, Field
+from pydantic import BaseModel, ValidationInfo, Field, model_validator
 from datetime import datetime
 
 class BaseEvent(BaseModel):
