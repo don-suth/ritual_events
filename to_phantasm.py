@@ -1,4 +1,5 @@
 from datetime import datetime
+from pydantic import TypeAdapter, ValidationError
 from pydantic_extra_types.color import Color as Colour
 from typing import Literal
 from base_event import BaseEvent
@@ -23,3 +24,18 @@ class UpdateClockSettingsEvent(BaseEvent):
 	new_brightness: int | None = None
 	new_text_colour: Colour | None = None
 	alternate_seconds: bool | None = None
+
+
+supported_to_phantasm_events = (
+	LetMeInEvent
+	| FoodRunEvent
+	| UpdateClockSettingsEvent
+)
+to_phantasm_adapter = TypeAdapter(supported_to_phantasm_events)
+
+def validate_to_phantasm_event(raw_event, action_is_mandatory=True):
+	try:
+		event = to_phantasm_adapter.validate_python(raw_event, context={"action_is_mandatory": action_is_mandatory})
+	except ValidationError:
+		event = None
+	return event
