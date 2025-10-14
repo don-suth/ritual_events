@@ -1,48 +1,25 @@
-from enum import Enum
 from datetime import datetime
-from pydantic import BaseModel, Field
 from pydantic_extra_types.color import Color as Colour
 from typing import Literal
+from base_event import BaseEvent
+
+entrances = Literal["Tav", "Guild"]
 
 
-class EntranceEnum(str, Enum):
-	TAV = "Tav"
-	GUILD = "Guild"
-
-
-class LetMeInData(BaseModel):
-	name: str
-	entrance: EntranceEnum
-
-
-class LetMeInAction(BaseModel):
-	time: datetime
+class LetMeInEvent(BaseEvent):
 	action: Literal["LetMeIn"] = "LetMeIn"
-	data: LetMeInData
+	name: str
+	entrance: entrances
 
 
-class FoodRunData(BaseModel):
-	arrival_time: datetime
-	entrance: EntranceEnum
-
-
-class FoodRunAction(BaseModel):
-	time: datetime
+class FoodRunEvent(BaseEvent):
 	action: Literal["FoodRun"] = "FoodRun"
-	data: FoodRunData
+	arrival_time: datetime
+	entrance: entrances
 
 
-class ClockSettingsUpdateData(BaseModel):
-	brightness: int | None
-	text_colour: Colour | None
-	alternate_seconds_indicator: bool | None
-
-
-class ClockSettingsUpdateAction(BaseModel):
-	time: datetime
+class UpdateClockSettingsEvent(BaseEvent):
 	action: Literal["ClockSettingsUpdate"] = "ClockSettingsUpdate"
-	data: ClockSettingsUpdateData
-
-
-class ReceivedAction(BaseModel):
-	action: LetMeInAction | FoodRunAction | ClockSettingsUpdateAction = Field(discriminator="action")
+	new_brightness: int | None = None
+	new_text_colour: Colour | None = None
+	alternate_seconds: bool | None = None
