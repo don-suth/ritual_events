@@ -1,22 +1,13 @@
-from datetime import datetime
-from pydantic import BaseModel
+from base_event import BaseEvent
+from typing import Literal
 
 
-class AuthenticateData(BaseModel):
+class AuthenticateEvent(BaseEvent):
+	action: Literal["Authenticate"] = "Authenticate"
 	token: str
 
+class OpenDoorAction(BaseEvent):
+	action: Literal["OpenDoor"] = "OpenDoor"
 
-class AuthenticateAction(BaseModel):
-	time: datetime
-	action: str = "Authenticate"
-	data: AuthenticateData
-
-
-class OpenDoorAction(BaseModel):
-	time: datetime
-	action: str = "OpenDoor"
-
-
-class CloseDoorAction(BaseModel):
-	time: datetime
-	action: str = "CloseDoor"
+class CloseDoorAction(BaseEvent):
+	action: Literal["CloseDoor"] = "CloseDoor"
