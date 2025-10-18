@@ -33,9 +33,18 @@ supported_to_phantasm_events = (
 )
 to_phantasm_adapter = TypeAdapter(supported_to_phantasm_events)
 
-def validate_to_phantasm_event(raw_event, action_is_mandatory=True):
+def validate_to_phantasm(python_event, action_is_mandatory=True):
 	try:
-		event = to_phantasm_adapter.validate_python(raw_event, context={"action_is_mandatory": action_is_mandatory})
+		event = to_phantasm_adapter.validate_python(python_event, context={"action_is_mandatory": action_is_mandatory})
 	except ValidationError:
 		event = None
 	return event
+
+
+def validate_to_phantasm_json(json_event, action_is_mandatory=True):
+	try:
+		event = to_phantasm_adapter.validate_json(json_event, context={"action_is_mandatory": action_is_mandatory})
+	except ValidationError:
+		event = None
+	return event
+
