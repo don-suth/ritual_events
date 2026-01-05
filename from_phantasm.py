@@ -1,4 +1,4 @@
-from base_event import BaseEvent
+from .base_event import BaseEvent
 from typing import Literal
 from pydantic import TypeAdapter, ValidationError
 

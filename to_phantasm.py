@@ -2,7 +2,7 @@ from datetime import datetime
 from pydantic import TypeAdapter, ValidationError
 from pydantic_extra_types.color import Color as Colour
 from typing import Literal
-from base_event import BaseEvent
+from .base_event import BaseEvent
 
 entrances = Literal["Tav", "Guild"]
 
