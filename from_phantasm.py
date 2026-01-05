@@ -15,6 +15,7 @@ class OpenDoorEvent(BaseEvent):
 class CloseDoorEvent(BaseEvent):
 	action: Literal["CloseDoor"] = "CloseDoor"
 
+
 supported_from_phantasm_events = (
 	AuthenticateEvent
 	| OpenDoorEvent
