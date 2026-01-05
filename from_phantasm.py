@@ -8,18 +8,8 @@ class AuthenticateEvent(BaseEvent):
 	token: str
 
 
-class OpenDoorEvent(BaseEvent):
-	action: Literal["OpenDoor"] = "OpenDoor"
-
-
-class CloseDoorEvent(BaseEvent):
-	action: Literal["CloseDoor"] = "CloseDoor"
-
-
 supported_from_phantasm_events = (
 	AuthenticateEvent
-	| OpenDoorEvent
-	| CloseDoorEvent
 )
 from_phantasm_adapter = TypeAdapter(supported_from_phantasm_events)
 

@@ -26,10 +26,20 @@ class UpdateClockSettingsEvent(BaseEvent):
 	alternate_seconds: bool | None = None
 
 
+class OpenDoorEvent(BaseEvent):
+	action: Literal["OpenDoor"] = "OpenDoor"
+
+
+class CloseDoorEvent(BaseEvent):
+	action: Literal["CloseDoor"] = "CloseDoor"
+
+
 supported_to_phantasm_events = (
 	LetMeInEvent
 	| FoodRunEvent
 	| UpdateClockSettingsEvent
+	| OpenDoorEvent
+	| CloseDoorEvent
 )
 to_phantasm_adapter = TypeAdapter(supported_to_phantasm_events)
 
