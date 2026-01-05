@@ -7,12 +7,13 @@ class AuthenticateEvent(BaseEvent):
 	action: Literal["Authenticate"] = "Authenticate"
 	token: str
 
+
 class OpenDoorEvent(BaseEvent):
 	action: Literal["OpenDoor"] = "OpenDoor"
 
+
 class CloseDoorEvent(BaseEvent):
 	action: Literal["CloseDoor"] = "CloseDoor"
-
 
 supported_from_phantasm_events = (
 	AuthenticateEvent
@@ -20,6 +21,7 @@ supported_from_phantasm_events = (
 	| CloseDoorEvent
 )
 from_phantasm_adapter = TypeAdapter(supported_from_phantasm_events)
+
 
 def validate_from_phantasm(python_event, action_is_mandatory=True):
 	try:
